@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using airspeed velocity &mdash; airspeed velocity 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="_static/swallow.ico"/>
+    <link rel="top" title="airspeed velocity 0.1 documentation" href="index.html" />
+    <link rel="next" title="Writing benchmarks" href="writing_benchmarks.html" />
+    <link rel="prev" title="Installing airspeed velocity" href="installing.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+  
+  <a href="https://github.com/spacetelescope/asv"
+     class="visible-desktop"><img
+    style="position: absolute; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          airspeed velocity</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a href="index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing airspeed velocity</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Using airspeed velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_benchmarks.html">Writing benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">Using airspeed velocity</a><ul>
+<li><a class="reference internal" href="#setting-up-a-new-benchmarking-project">Setting up a new benchmarking project</a></li>
+<li><a class="reference internal" href="#running-benchmarks">Running benchmarks</a><ul>
+<li><a class="reference internal" href="#machine-information">Machine information</a></li>
+<li><a class="reference internal" href="#environments">Environments</a></li>
+<li><a class="reference internal" href="#benchmarking">Benchmarking</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#viewing-the-results">Viewing the results</a></li>
+<li><a class="reference internal" href="#managing-the-results-database">Managing the results database</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li><a href="installing.html"
+         title="Previous Chapter: Installing airspeed velocity">&laquo; Installing airsp...</a></li>
+  <li><a href="writing_benchmarks.html"
+         title="Next Chapter: Writing benchmarks">Writing benchmar... &raquo;</a></li>
+              
+            
+            
+            
+            
+              <li></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="using-airspeed-velocity">
+<h1>Using airspeed velocity<a class="headerlink" href="#using-airspeed-velocity" title="Permalink to this headline">¶</a></h1>
+<p><strong>airspeed velocity</strong> is designed to benchmark a single project over
+its lifetime using a given set of benchmarks.  Below, we use the
+phrase &#8220;project&#8221; to refer to the project being benchmarked, and
+&#8220;benchmark suite&#8221; to refer to the set of benchmarks &#8211; i.e., little
+snippets of code that are timed &#8211; being run against the project.  The
+benchmark suite may live inside the project&#8217;s repository, or it may
+reside in a separate repository &#8211; the choice is up to you and is
+primarily a matter of style or policy.  Importantly, the result data
+stored alongside the benchmark suite may grow quite large, which is a
+good reason to not include it in the main project repository.</p>
+<p>The user interacts with <strong>airspeed velocity</strong> through the <tt class="docutils literal"><span class="pre">asv</span></tt>
+command.  Like <tt class="docutils literal"><span class="pre">git</span></tt>, the <tt class="docutils literal"><span class="pre">asv</span></tt> command has a number of
+&#8220;subcommands&#8221; for performing various actions on your benchmarking
+project.</p>
+<div class="section" id="setting-up-a-new-benchmarking-project">
+<h2>Setting up a new benchmarking project<a class="headerlink" href="#setting-up-a-new-benchmarking-project" title="Permalink to this headline">¶</a></h2>
+<p>The first thing to do is to set up an <strong>airspeed velocity</strong> benchmark
+suite for your project.  It must contain, at a minimum, a single
+configuration file, <tt class="docutils literal"><span class="pre">asv.conf.json</span></tt>, and a directory tree of Python
+files containing benchmarks.</p>
+<p>The <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">quickstart</span></tt> command can be used to create a new
+benchmarking suite.  Change to the directory where you would like your
+new benchmarking suite to be created and run:</p>
+<div class="highlight-python"><pre>$ asv quickstart
+Edit asv.conf.json to get started.</pre>
+</div>
+<p>Now that you have the bare bones of a benchmarking suite, let&#8217;s edit
+the configuration file, <tt class="docutils literal"><span class="pre">asv.conf.json</span></tt>.  Like most files that
+<strong>airspeed velocity</strong> uses and generates, it is a JSON file.</p>
+<p>There are comments in the file describing what each of the elements
+do, and there is also a <a class="reference internal" href="asv.conf.json.html#conf-reference"><em>asv.conf.json reference</em></a> with more details.  The
+values that will most likely need to be changed for any benchmarking
+suite are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">project</span></tt>: The name of the project being benchmarked.</li>
+<li><tt class="docutils literal"><span class="pre">project_url</span></tt>: The project&#8217;s homepage.</li>
+<li><tt class="docutils literal"><span class="pre">repo</span></tt>: The URL to the DVCS repository for the project.  This
+should be a read-only URL so that anyone, even those without
+commit rights to the repository, can run the benchmarks.  For a
+project on github, for example, the URL would look like:
+<tt class="docutils literal"><span class="pre">https://github.com/spacetelescope/asv.git</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">show_commit_url</span></tt>: The base of URLs used to display commits for
+the project.  This allows users to click on a commit in the web
+interface and have it display the contents of that commit.  For a
+github project, the URL is of the form
+<tt class="docutils literal"><span class="pre">http://github.com/$OWNER/$REPO/commit/</span></tt>.</li>
+</ul>
+</div></blockquote>
+<p>The rest of the values can usually be left to their defaults, unless
+you want to benchmark against multiple versions of Python or multiple
+versions of third-party dependencies.</p>
+<p>Once you&#8217;ve set up the project&#8217;s configuration, you&#8217;ll need to write
+some benchmarks.  The benchmarks live in Python files in the
+<tt class="docutils literal"><span class="pre">benchmarks</span></tt> directory.  The <tt class="docutils literal"><span class="pre">quickstart</span></tt> command has created a
+single example benchmark file already in
+<tt class="docutils literal"><span class="pre">benchmarks/benchmarks.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TimeSuite</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An example benchmark that times the performance of various kinds</span>
+<span class="sd">    of iterating over dictionaries in Python.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">time_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">time_iterkeys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">():</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">time_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">time_xrange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You&#8217;ll want to replace these benchmarks with your own.  See
+<a class="reference internal" href="writing_benchmarks.html#writing-benchmarks"><em>Writing benchmarks</em></a> for more information.</p>
+</div>
+<div class="section" id="running-benchmarks">
+<h2>Running benchmarks<a class="headerlink" href="#running-benchmarks" title="Permalink to this headline">¶</a></h2>
+<p>Benchmarks are run using the <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">run</span></tt> subcommand.</p>
+<p>Let&#8217;s start by just benchmarking the current <tt class="docutils literal"><span class="pre">master</span></tt> of the project:</p>
+<div class="highlight-python"><pre>$ asv run</pre>
+</div>
+<div class="section" id="machine-information">
+<h3>Machine information<a class="headerlink" href="#machine-information" title="Permalink to this headline">¶</a></h3>
+<p>If this is the first time using <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">run</span></tt> on a given machine, (which
+it probably is, if you&#8217;re following along), you will be prompted for
+information about the machine, such as its platform, cpu and memory.
+<strong>airspeed velocity</strong> will try to make reasonable guesses, so it&#8217;s
+usually ok to just press <tt class="docutils literal"><span class="pre">Enter</span></tt> to accept each default value.  This
+information is stored in the <tt class="docutils literal"><span class="pre">.asv-machine.json</span></tt> file in your home
+directory:</p>
+<div class="highlight-python"><pre>No ASV machine info file found.
+I will now ask you some questions about this machine to identify
+it in the benchmarks.
+
+1. NAME: A unique name to identify this machine in the results.
+NAME [cheetah]:
+2. OS: The OS type and version of this machine.
+OS [Linux 3.11.7-200.fc19.x86_64]:
+3. ARCH: The architecture of the machine, e.g. i386
+ARCH [x86_64]:
+4. CPU: A human-readable description of the CPU.
+CPU [Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz (4 cores)]:
+4. RAM: The amount of physical RAM in the system.
+RAM [8.2G]:</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you ever need to update the machine information later, you can
+run <tt class="xref py py-obj docutils literal"><span class="pre">asv</span> <span class="pre">machine</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="environments">
+<h3>Environments<a class="headerlink" href="#environments" title="Permalink to this headline">¶</a></h3>
+<p>Next, the Python virtual environments will be set up: one for each of
+the combinations of Python versions and the matrix of project
+dependencies, if any.  The first time this is run, this may take some
+time, as many files are copied over and dependencies are installed
+into the environment.  The environments are stored in the <tt class="docutils literal"><span class="pre">env</span></tt>
+directory so that the next time the benchmarks are run, things will
+start much faster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><tt class="docutils literal"><span class="pre">asv</span></tt> does not build Pythons for you, but it expects to find
+each of the Python versions specified in the <tt class="docutils literal"><span class="pre">asv.conf.json</span></tt>
+file available on the <tt class="docutils literal"><span class="pre">PATH</span></tt>.  For example, if the
+<tt class="docutils literal"><span class="pre">asv.conf.json</span></tt> file has:</p>
+<div class="highlight-python"><pre>"pythons": ["2.7", "3.3"]</pre>
+</div>
+<p class="last">then it will use the executables named <tt class="docutils literal"><span class="pre">python2.7</span></tt> and
+<tt class="docutils literal"><span class="pre">python3.3</span></tt> on the path.  There are many ways to get multiple
+versions of Python installed &#8211; your package manager, <tt class="docutils literal"><span class="pre">apt-get</span></tt>,
+<tt class="docutils literal"><span class="pre">yum</span></tt>, <tt class="docutils literal"><span class="pre">MacPorts</span></tt> or <tt class="docutils literal"><span class="pre">homebrew</span></tt> probably has them, or you
+can also use <a class="reference external" href="https://github.com/yyuu/pyenv">pyenv</a>.  <tt class="docutils literal"><span class="pre">asv</span></tt>
+always works in a virtual environment, so it will not change what
+is installed in any of the python environments on your system.</p>
+</div>
+</div>
+<div class="section" id="benchmarking">
+<h3>Benchmarking<a class="headerlink" href="#benchmarking" title="Permalink to this headline">¶</a></h3>
+<p>Finally, the benchmarks are run:</p>
+<div class="highlight-python"><pre>Benchmarking py2.7
+  project commit hash 24ce4372:.
+   Uninstalling project..
+   Installing ...asv/project.......
+    [25.00%] test_benchmarks.TestIteration.test_iterkeys: 73.81μs
+    [50.00%] test_benchmarks.TestIteration.test_keys: 74.04μs
+    [75.00%] test_benchmarks.TestIteration.test_range: 97.44μs
+    [100.00%] test_benchmarks.TestIteration.test_xrange: 94.76μs</pre>
+</div>
+<p>To improve reproducibility, each benchmark is run in its own process.</p>
+<p>The killer feature of <strong>airspeed velocity</strong> is that it can track the
+benchmark performance of your project over time.  The required
+<tt class="docutils literal"><span class="pre">range</span></tt> argument to <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">run</span></tt> specifies a range of commits that
+should be benchmarked.  The value of this argument is passed directly
+to <tt class="docutils literal"><span class="pre">git</span> <span class="pre">log</span></tt> to get the set of commits, so it actually has a very
+powerful syntax defined in the <a class="reference external" href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions manpage</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Yes, this is git-specific for now.  Support for Mercurial or other
+DVCSes should be possible in the future, but not at the moment.</p>
+</div>
+<p>For example, to benchmark all of the commits since a particular tag
+(<tt class="docutils literal"><span class="pre">v0.1</span></tt>):</p>
+<div class="highlight-python"><pre>asv run v0.1..master</pre>
+</div>
+<p>In many cases, this may result in more commits than you are able to
+benchmark in a reasonable amount of time.  In that case, the
+<tt class="docutils literal"><span class="pre">--steps</span></tt> argument is helpful.  It specifies the maximum number of
+commits you want to test, and it will evenly space them over the
+specified range.</p>
+<p>You may also want to benchmark every commit that has already been
+benchmarked on all the other machines.  For that, use:</p>
+<div class="highlight-python"><pre>asv run existing</pre>
+</div>
+<p>You can benchmark all commits since the last one that was benchmarked
+on this machine.  This is useful for running in nightly cron jobs:</p>
+<div class="highlight-python"><pre>asv run latest</pre>
+</div>
+<p>The results are stored as a tree of files in the directory
+<tt class="docutils literal"><span class="pre">results/$MACHINE</span></tt>, where <tt class="docutils literal"><span class="pre">$MACHINE</span></tt> is the unique machine name
+that was set up in your <tt class="docutils literal"><span class="pre">~/.asv-machine.json</span></tt> file.  In order to
+combine results from multiple machines, the normal workflow is to
+commit these results to a source code repository alongside the results
+from other machines.  These results are then collated and &#8220;published&#8221;
+altogether into a single interactive website for viewing.</p>
+<p>You can also continue to generate benchmark results for other commits,
+or for new benchmarks and continue to throw them in the <tt class="docutils literal"><span class="pre">results</span></tt>
+directory.  <strong>airspeed velocity</strong> is designed from the ground up to
+handle missing data where certain benchmarks have yet to be performed
+&#8211; it&#8217;s entirely up to you how often you want to generate results, and
+on which commits and in which configurations.</p>
+</div>
+</div>
+<div class="section" id="viewing-the-results">
+<h2>Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permalink to this headline">¶</a></h2>
+<p>To collate a set of results into a viewable website, run:</p>
+<div class="highlight-python"><pre>asv publish</pre>
+</div>
+<p>This will put a tree of files in the <tt class="docutils literal"><span class="pre">html</span></tt> directory.  This website
+can not be viewed directly from the local filesystem, since web
+browsers do not support AJAX requests to the local filesystem.
+Instead, <strong>airspeed velocity</strong> provides a simple static webserver that
+can be used to preview the website.  Just run:</p>
+<div class="highlight-python"><pre>asv preview</pre>
+</div>
+<p>and open the URL that is displayed at the console.  Press Ctrl+C to
+stop serving.</p>
+<p>To share the website on the open internet, simply put these files on
+any webserver that can serve static content.  Github Pages works quite
+well, for example.</p>
+</div>
+<div class="section" id="managing-the-results-database">
+<h2>Managing the results database<a class="headerlink" href="#managing-the-results-database" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">rm</span></tt> command can be used to remove benchmarks from the
+database.  The command takes an arbitrary number of <tt class="docutils literal"><span class="pre">key=value</span></tt>
+entries that are &#8220;and&#8221;ed together to determine which benchmarks to
+remove.</p>
+<p>The keys may be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">benchmark</span></tt>: A benchmark name</li>
+<li><tt class="docutils literal"><span class="pre">python</span></tt>: The version of python</li>
+<li><tt class="docutils literal"><span class="pre">commit_hash</span></tt>: The commit hash</li>
+<li>machine-related: <tt class="docutils literal"><span class="pre">machine</span></tt>, <tt class="docutils literal"><span class="pre">arch</span></tt>, <tt class="docutils literal"><span class="pre">cpu</span></tt>, <tt class="docutils literal"><span class="pre">os</span></tt>, <tt class="docutils literal"><span class="pre">ram</span></tt></li>
+<li>environment-related: a name of a dependency, e.g. <tt class="docutils literal"><span class="pre">numpy</span></tt></li>
+</ul>
+</div></blockquote>
+<p>The values are glob patterns, as supported by the Python standard
+library module <a class="reference external" href="http://docs.python.org/library/fnmatch.html#module-fnmatch" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">fnmatch</span></tt></a>.  So, for example, to remove all benchmarks
+in the <tt class="docutils literal"><span class="pre">time_units</span></tt> module:</p>
+<div class="highlight-python"><pre>asv rm "benchmark=time_units.*"</pre>
+</div>
+<p>Note the double quotes around the entry to prevent the shell from
+expanding the <tt class="docutils literal"><span class="pre">*</span></tt> itself.</p>
+<p>The <tt class="docutils literal"><span class="pre">asv</span> <span class="pre">rm</span></tt> command will prompt before performing any operations.
+Passing the <tt class="docutils literal"><span class="pre">-y</span></tt> option will skip the prompt.  Note that generally
+the results will be stored in a source code repository, so it should
+be possible to undo any of the changes using the DVCS directly as
+well.</p>
+<p>Here is a more complex example, to remove all of the benchmarks on
+Python 2.7 and the machine named <tt class="docutils literal"><span class="pre">giraffe</span></tt>:</p>
+<div class="highlight-python"><pre>asv rm python=2.7 machine=giraffe</pre>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Michael Droettboom.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

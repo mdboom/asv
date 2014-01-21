@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing airspeed velocity &mdash; airspeed velocity 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="_static/swallow.ico"/>
+    <link rel="top" title="airspeed velocity 0.1 documentation" href="index.html" />
+    <link rel="next" title="Using airspeed velocity" href="using.html" />
+    <link rel="prev" title="airspeed velocity" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+  
+  <a href="https://github.com/spacetelescope/asv"
+     class="visible-desktop"><img
+    style="position: absolute; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          airspeed velocity</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a href="index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installing airspeed velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using airspeed velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_benchmarks.html">Writing benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">Installing airspeed velocity</a><ul>
+<li><a class="reference internal" href="#optional-optimization">Optional optimization</a></li>
+<li><a class="reference internal" href="#running-the-self-tests">Running the self-tests</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li><a href="index.html"
+         title="Previous Chapter: airspeed velocity">&laquo; airspeed velocit...</a></li>
+  <li><a href="using.html"
+         title="Next Chapter: Using airspeed velocity">Using airspeed v... &raquo;</a></li>
+              
+            
+            
+            
+            
+              <li></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="installing-airspeed-velocity">
+<h1>Installing airspeed velocity<a class="headerlink" href="#installing-airspeed-velocity" title="Permalink to this headline">¶</a></h1>
+<p><strong>airspeed velocity</strong> is known to work on Linux and Mac OS-X.  It&#8217;s
+highly unlikely that it works on Microsoft Windows.  It is known to
+work with Python 2.6, 2.7, 3.2 and 3.3.</p>
+<p><strong>airspeed velocity</strong> is a standard Python package, with its
+installation based on <tt class="docutils literal"><span class="pre">setuptools</span></tt>, and can be installed using:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+<p>The requirements should be automatically installed.  If they aren&#8217;t
+installed automatically, for example due to networking restrictions,
+the requirements are:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><a class="reference external" href="http://pythonhosted.org/six/">six</a>, 1.4 or later</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://virtualenv.org/">virtualenv</a>, 1.10 or later (this is
+true even with Python 3.3, where virtualenv is included as venv,
+since venv is not compatible with other versions of Python).</p>
+<p>Note that virtualenv 1.11.0 will not work, as it contains a bug
+in setuptools that prevents its installation in a clean virtual
+environment.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Optional dependencies, required only to determine machine information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://code.google.com/p/psutil/">psutil</a></li>
+<li><a class="reference external" href="http://www.numpy.org/">numpy</a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="optional-optimization">
+<h2>Optional optimization<a class="headerlink" href="#optional-optimization" title="Permalink to this headline">¶</a></h2>
+<p>If your project being benchmarked contains C, C++, Objective-C or
+Cython, consider installing <tt class="docutils literal"><span class="pre">ccache</span></tt>.  <a class="reference external" href="https://ccache.samba.org/">ccache</a> is a compiler cache that speeds up
+compilation time when the same objects are repeatedly compiled.  In
+<strong>airspeed velocity</strong>, the project being benchmarked is recompiled at
+many different points in its history, often with only minor changes to
+the source code, so <tt class="xref py py-obj docutils literal"><span class="pre">ccache</span></tt> can help speed up the total benchmarking
+time considerably.</p>
+</div>
+<div class="section" id="running-the-self-tests">
+<h2>Running the self-tests<a class="headerlink" href="#running-the-self-tests" title="Permalink to this headline">¶</a></h2>
+<p>The self tests are based on <a class="reference external" href="http://pytest.org/">py.test</a>.  If you
+don&#8217;t have it installed, and you have a connection to the Internet, it
+will be installed automatically.</p>
+<p>To run <strong>airspeed velocity</strong>&#8216;s self tests:</p>
+<div class="highlight-python"><pre>python setup.py test</pre>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Michael Droettboom.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
