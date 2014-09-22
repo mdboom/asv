@@ -65,7 +65,7 @@ class Compare(Command):
         for path in iter_machine_files(conf.results_dir):
             d = load_json(path)
             machines.append(d['machine'])
-        
+
         if len(machines) == 0:
             raise Exception("No results found")
         elif machine is None:
@@ -74,7 +74,7 @@ class Compare(Command):
                                 "specify which one to use with the --machine option".format('/'.join(machines)))
             else:
                 machine = machines[0]
-        elif not machine in machines:        
+        elif not machine in machines:
             raise ValueError("Results for machine '{0} not found".format(machine))
 
         results_1 = None
@@ -118,18 +118,24 @@ class Compare(Command):
 
             if time_1 is None and time_2 is not None:
                 color = 'green'
+                mark = '^'
             elif time_1 is not None and time_2 is None:
                 color = 'red'
+                mark = 'v'
             elif time_2 < time_1 / threshold:
                 color = 'green'
+                mark = '^'
             elif time_2 > time_1 * threshold:
                 color = 'red'
+                mark = 'v'
             else:
                 color = 'default'
-
-            details = "{0:>9s}  {1:>9s} {2:>9s}  ".format('failed' if time_1 is None else human_time(time_1),
-                                                         'failed' if time_2 is None else human_time(time_2),
-                                                         ratio)
+                mark = ' '
+            details = "{0:1s} {1:>9s}  {2:>9s} {3:>9s}  ".format(
+                mark,
+                'failed' if time_1 is None else human_time(time_1),
+                'failed' if time_2 is None else human_time(time_2),
+                ratio)
 
             if split:
                 bench[color].append((color, details, benchmark))
@@ -155,8 +161,8 @@ class Compare(Command):
             print("")
             print(titles[key])
             print("")
-            print("  before     after       ratio")
-            print("[{0:8s}] [{1:8s}]".format(hash_1[:8], hash_2[:8]))
+            print("    before     after       ratio")
+            print("  [{0:8s}] [{1:8s}]".format(hash_1[:8], hash_2[:8]))
 
             for color, details, benchmark in bench[key]:
                 color_print(details, color, end='')
