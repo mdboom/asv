@@ -5,10 +5,9 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 from . import Command
-from ..machine import Machine, iter_machine_files
-from ..repo import get_repo
-from ..results import iter_results, iter_results_for_machine
-from ..util import hash_equal, human_time, load_json
+from ..machine import iter_machine_files
+from ..results import iter_results_for_machine_and_hash
+from ..util import human_time, load_json
 from ..console import color_print
 
 
@@ -80,16 +79,18 @@ class Compare(Command):
         results_1 = None
         results_2 = None
 
-        for result in iter_results_for_machine(conf.results_dir, machine):
-            if hash_equal(hash_1, result.commit_hash):
-                results_1 = result
-            if hash_equal(hash_2, result.commit_hash):
-                results_2 = result
-
-        if results_1 is None:
+        for result in iter_results_for_machine_and_hash(
+                conf.results_dir, machine, hash_1):
+            results_1 = result
+            break
+        else:
             raise ValueError("Did not find results for commit {0}".format(hash_1))
 
-        if results_2 is None:
+        for result in iter_results_for_machine_and_hash(
+                conf.results_dir, machine, hash_2):
+            results_2 = result
+            break
+        else:
             raise ValueError("Did not find results for commit {0}".format(hash_2))
 
         benchmarks_1 = set(results_1.results.keys())
